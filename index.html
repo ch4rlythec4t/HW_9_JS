@@ -1,67 +1,124 @@
-<!--
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .visibility {
+            visibility: visible
+        }
+        
+        .error {
+            border: 2px solid red;
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!--
 Обязательное задание.
 
 Выполнить все задачи в теге script. Комментарии, в которых написаны задачи, не
 стирать, код с решением задачи пишем под комментарием.
 -->
+    <div class="action">
+        <input id="from" class="from" type="text"> В инпуте написано: <span class="span"></span>
 
-<input id="from" type="text"> В инпуте написано: <span></span>
+        <br>
 
-<br>
+        <button class="messageBtn">Показать блок</button>
+        <div class="message">
+            Привет :)
+        </div>
 
-<button class="messageBtn">Показать блок</button>
-<div class="message">
-    Привет :)
-</div>
+        <br>
 
-<br>
+        <form>
+            <label>
+    Первый инпут:
+    <input class="form-control" type="text">
+    </label>
+            <br>
+            <br>
+            <label>
+    Второй инпут:
+    <select class="form-control">
+    <option value=""></option>
+    <option value="1">Один</option>
+    <option value="2">Два</option>
+    </select>
+    </label>
+            <br>
+            <br>
+            <button>Отправить</button>
+        </form>
 
-<form>
-    <label>
-Первый инпут:
-<input class="form-control" type="text">
-</label>
-    <br>
-    <br>
-    <label>
-Второй инпут:
-<select class="form-control">
-<option value=""></option>
-<option value="1">Один</option>
-<option value="2">Два</option>
-</select>
-</label>
-    <br>
-    <br>
-    <button>Отправить</button>
-</form>
+    </div>
 
-<script>
-    "use strict";
+    <script>
+        "use strict";
 
-    /*
-    1. При изменении значения в input с id="from", значение содержащееся в нем
-    должно моментально отображаться в span. То есть при печати в input'е тег span
-    также должен меняться.
-    */
+        /*
+        1. При изменении значения в input с id="from", значение содержащееся в нем
+        должно моментально отображаться в span. То есть при печати в input'е тег span
+        также должен меняться.
+        */
+        const inputFromEl = document.querySelector(".from");
+        const spanEl = document.querySelector('.span');
 
-    /*
-    2. При клике на кнопку с классом messageBtn необходимо элементу с классом
-    message:
-    1) добавить два класса: animate_animated и animate_fadeInLeftBig
-    2) поставить данному элементу стиль visibility в значение 'visible'.
-    */
+        inputFromEl.addEventListener('keyup', function(e) {
+            spanEl.textContent = inputFromEl.value
+            console.log(inputFromEl.value);
 
-    /*
-    3. Необходимо при отправке формы проверить, заполнены ли все поля в этой
-    форме. Если какое-либо поле не заполнено, форма не должна отправляться, также
-    должны быть подсвечены незаполненные поля (необходимо поставить класс error
-    незаполненным полям).
-    Как только пользователь начинает заполнять какое-либо поле, необходимо,
-    при вводе в данное поле, произвести проверку:
-    Если поле пустое, необходимо данное поле подсветить (поставить класс error
-    данному полю).
-    Если поле было чем-либо заполнено, подсветку (класс error) необходимо убрать.
+        });
 
-    Доп. задание: добавить анимации в случае, если ошибка (error)
-    */
+        /*
+        2. При клике на кнопку с классом messageBtn необходимо элементу с классом
+        message:
+        1) добавить два класса: animate_animated и animate_fadeInLeftBig
+        2) поставить данному элементу стиль visibility в значение 'visible'.
+        */
+        const messageBtnEl = document.querySelector('.messageBtn');
+        messageBtnEl.addEventListener('click', function(e) {
+            messageBtnEl.classList.add('animate_animated')
+            messageBtnEl.classList.add('animate_fadeInLeftBig')
+            messageBtnEl.classList.add('visibility')
+            console.log(messageBtnEl);
+        });
+
+        /*
+        3. Необходимо при отправке формы проверить, заполнены ли все поля в этой
+        форме. Если какое-либо поле не заполнено, форма не должна отправляться, также
+        должны быть подсвечены незаполненные поля (необходимо поставить класс error
+        незаполненным полям).
+        Как только пользователь начинает заполнять какое-либо поле, необходимо,
+        при вводе в данное поле, произвести проверку:
+        Если поле пустое, необходимо данное поле подсветить (поставить класс error
+        данному полю).
+        Если поле было чем-либо заполнено, подсветку (класс error) необходимо убрать.
+     
+        Доп. задание: добавить анимации в случае, если ошибка (error)
+        */
+
+        const actionEl = document.querySelector('.action');
+        const formControlEl = document.querySelectorAll('.form-control');
+        // inputFromEl.classList.add("error")
+        actionEl.addEventListener('submit', function(e) {
+
+            if (inputFromEl.value === "" || formControlEl[0].value === "" || formControlEl[1].value === "") {
+                inputFromEl.classList.add("error")
+                formControlEl[0].classList.add("error")
+                formControlEl[1].classList.add("error")
+
+                event.preventDefault()
+            }
+        });
+    </script>
+</body>
+
+
+</html>
